@@ -327,6 +327,26 @@ main{overflow-x:clip}
   .consulenza-home li:hover{transform:scale(1.04)}
 }
 
+/* la foto non cresce: si allarga la finestra circolare insieme al cerchio terracotta */
+.medaglione .clip-cerchio{transform-box:fill-box;transform-origin:center;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .ritratto:hover .medaglione .clip-cerchio,.invito:hover .medaglione .clip-cerchio{transform:scale(1.06);transition-delay:.05s}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .ritratto:hover .medaglione>circle:nth-of-type(1),.invito:hover .medaglione>circle:nth-of-type(1){transform:scale(1.07)}
+  .ritratto:hover .medaglione>circle:nth-of-type(2),.invito:hover .medaglione>circle:nth-of-type(2),
+  .ritratto:hover .medaglione .clip-cerchio,.invito:hover .medaglione .clip-cerchio{transform:scale(1.1)}
+  .ritratto:hover .medaglione>circle:nth-of-type(3),.invito:hover .medaglione>circle:nth-of-type(3){transform:scale(1.18)}
+}
+
+/* etichette delle competenze sopra i titoli */
+.etichette{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0 0 20px;padding:0;max-width:min(640px,100%)}
+.etichette li{border-radius:999px;padding:5px 14px;font-weight:800;font-size:14px;line-height:1.4;background:var(--t1)}
+.etichette li:nth-child(3n+2){background:var(--t2)} .etichette li:nth-child(3n){background:var(--t3)}
+
+.btn-vuoto{background:var(--fondo)}
+.banda .btn-vuoto{background:transparent}
+
 /* sfondi illustrati */
 main{position:relative}
 .sfondo-wrap{position:absolute;left:0;right:0;top:0;display:flex;justify-content:center;pointer-events:none;z-index:0;overflow:hidden}
@@ -341,6 +361,7 @@ main>section{position:relative;z-index:1}
 @media (max-width:600px){.sfondo-wrap{opacity:.45}}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sfondo-wrap{opacity:.4}}
 :root[data-theme="dark"] .sfondo-wrap{opacity:.4}
+@media (min-width:601px){.testa-pagina.testa-alta{min-height:calc(min(1240px,100vw)*.6)}}
 .credito{font-size:14px;color:var(--tenue);margin:24px 0 0}
 .credito a{color:inherit}
 @keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
@@ -357,3 +378,6 @@ main>section{position:relative;z-index:1}
   .aereo-anim,.sfondo .temp{display:none}
   .aereo-fermo{display:inline}
 }
+
+.lingua{margin-left:8px}
+.lingua a{color:inherit}
