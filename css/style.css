@@ -347,6 +347,46 @@ main{overflow-x:clip}
 .btn-vuoto{background:var(--fondo)}
 .banda .btn-vuoto{background:transparent}
 
+/* ===== ottimizzazione telefono e tablet ===== */
+/* menu completo già da 820px, più compatto fino a 960 */
+@media (min-width:820px) and (max-width:960px){
+  .testata nav{display:block}
+  .menu{display:none}
+  nav a{padding:8px 9px;font-size:15px}
+  .testata{gap:14px}
+}
+/* tablet: apertura della home su due colonne, porte affiancate */
+@media (min-width:700px) and (max-width:960px){
+  .apertura{grid-template-columns:1.15fr .85fr;gap:28px;padding-top:40px}
+  .apertura .testo{padding-bottom:40px}
+  .apertura h1{font-size:clamp(56px,8.5vw,80px)}
+  .ritratto{max-width:100%;justify-self:end;margin:0}
+  .griglia3{grid-template-columns:repeat(3,1fr);gap:14px}
+  .porta{padding:26px 20px 24px}
+  .porta p{font-size:16px}
+}
+/* telefono */
+@media (max-width:600px){
+  .testata{height:64px}
+  html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+  .apertura h1{font-size:clamp(56px,16vw,72px)}
+  .btn{padding:13px 22px}
+  .azioni .btn{flex:1 1 auto;justify-content:center}
+  /* lavori in home: striscia da scorrere col dito */
+  .lavori:not(.blocco) .mosaico{columns:auto;display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:4px 20px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .lavori:not(.blocco) .mosaico::-webkit-scrollbar{display:none}
+  .lavori:not(.blocco) .lavoro{flex:0 0 80%;scroll-snap-align:center;margin:0;display:flex;flex-direction:column}
+  .lavori:not(.blocco) .cornice-img{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center}
+  .lavori:not(.blocco) .cornice-img img{width:100%;height:100%;object-fit:contain}
+  .lavori:not(.blocco) .altri-lavori .btn{width:100%;justify-content:center}
+  /* illustrazioni delle pagine interne: in testa alla pagina, a tutta larghezza */
+  .sfondo-wrap.banner{position:relative;display:block;opacity:1;height:calc(100vw*var(--vh)/var(--vw));margin-top:4px}
+  .sfondo-wrap.banner .sfondo{position:absolute;max-width:none;width:calc(100vw*1200/var(--vw));left:calc(-100vw*var(--vx)/var(--vw));top:calc(-100vw*var(--vy)/var(--vw))}
+  .sfondo-wrap.banner + .testa-pagina{padding-top:8px}
+}
+@media (max-width:600px) and (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sfondo-wrap.banner{opacity:.85}}
+@media (max-width:600px){.testa-pagina h1{font-size:clamp(42px,12vw,56px)}}
+
 /* sfondi illustrati */
 main{position:relative}
 .sfondo-wrap{position:absolute;left:0;right:0;top:0;display:flex;justify-content:center;pointer-events:none;z-index:0;overflow:hidden}
