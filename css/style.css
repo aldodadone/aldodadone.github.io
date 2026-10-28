@@ -297,3 +297,63 @@ main{overflow-x:clip}
   .ritratto:hover .medaglione>circle:nth-of-type(2),.invito:hover .medaglione>circle:nth-of-type(2){transform:scale(1.06);transition-delay:.05s}
   .ritratto:hover .medaglione>circle:nth-of-type(3),.invito:hover .medaglione>circle:nth-of-type(3){transform:scale(1.14);transition-delay:.1s}
 }
+
+/* --- ritocchi richiesti --- */
+.medaglione{overflow:visible}
+.contatto .icona{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin-bottom:22px;background:var(--fondo)}
+.contatto .icona svg{width:26px;height:26px}
+.perchi-tit{font-weight:800;font-size:15px;color:var(--tenue);margin:4px 0 0!important;display:flex;align-items:center;gap:8px}
+.perchi-tit::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .3s}
+.perchi{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1)}
+.perchi>div{overflow:hidden}
+.tag{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:14px 0 2px}
+.tag li{background:var(--fondo);border-radius:999px;padding:6px 14px;font-weight:700;font-size:15px}
+.servizio:hover .perchi,.servizio:focus-within .perchi,.servizio:focus .perchi{grid-template-rows:1fr}
+.servizio:hover .perchi-tit::after,.servizio:focus .perchi-tit::after{transform:rotate(225deg) translateY(-2px)}
+.schede.due:has(.servizio){align-items:start}
+@media (hover:none){.perchi{grid-template-rows:1fr}.perchi-tit::after{display:none}}
+@media (prefers-reduced-motion:reduce){.perchi{transition:none}}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  /* ogni card cresce con il cerchio del proprio colore */
+  .porta:nth-child(1)::before,.scheda:nth-child(3n+1)::before,.contatto:nth-child(1)::before{background:var(--senape)}
+  .porta:nth-child(2)::before,.scheda:nth-child(3n+2)::before,.contatto:nth-child(2)::before{background:var(--acqua)}
+  .porta:nth-child(3)::before,.scheda:nth-child(3n)::before{background:var(--terracotta)}
+  /* lavori: anche una leggera rotazione, alternata */
+  .lavoro{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+  .lavoro:hover{transform:rotate(-1.5deg)}
+  .lavoro:nth-child(even):hover{transform:rotate(1.5deg)}
+  /* consulenza in home: le voci si allargano */
+  .consulenza-home li{transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s}
+  .consulenza-home li:hover{transform:scale(1.04)}
+}
+
+/* sfondi illustrati */
+main{position:relative}
+.sfondo-wrap{position:absolute;left:0;right:0;top:0;display:flex;justify-content:center;pointer-events:none;z-index:0;overflow:hidden}
+.sfondo{width:min(1240px,100%);height:auto;flex:none;overflow:visible}
+main>section{position:relative;z-index:1}
+.sfondo [style*="animation"]{transform-box:fill-box;transform-origin:center}
+.aereo-fermo{display:none}
+@media (min-width:601px){
+  .testa-pagina{min-height:calc(min(1240px,100vw)*.4);display:flex;flex-direction:column;justify-content:center}
+  .testa-pagina h1,.testa-pagina .lead{max-width:min(640px,56%)}
+}
+@media (max-width:600px){.sfondo-wrap{opacity:.45}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sfondo-wrap{opacity:.4}}
+:root[data-theme="dark"] .sfondo-wrap{opacity:.4}
+.credito{font-size:14px;color:var(--tenue);margin:24px 0 0}
+.credito a{color:inherit}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+@keyframes disegna{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes appare{from{opacity:0}to{opacity:1}}
+@keyframes schizzo{from{transform:translateX(120px) scale(0);opacity:0}70%{opacity:1}to{transform:none;opacity:1}}
+@keyframes incontro{from{transform:translate(var(--dx),var(--dy)) scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes lascia{from{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}to{transform:none;opacity:1}}
+@keyframes maniglia-tieni{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:none}}
+@keyframes maniglia-via{0%{opacity:0;transform:scale(.2)}25%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .sfondo *{animation:none!important}
+  .aereo-anim,.sfondo .temp{display:none}
+  .aereo-fermo{display:inline}
+}
